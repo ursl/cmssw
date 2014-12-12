@@ -20,4 +20,3 @@ process.MessageLogger = cms.Service("MessageLogger",
 process.readstruct =  cms.EDAnalyzer("SiPixelFedCablingMapAnalyzer")
 
 process.p = cms.Path(process.readstruct)
-

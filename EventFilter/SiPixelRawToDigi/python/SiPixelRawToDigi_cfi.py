@@ -11,7 +11,7 @@ siPixelDigis = cms.EDProducer("SiPixelRawToDigi",
 ## UserErrorList: list of error codes used by Pixel experts for investigation
     UserErrorList = cms.vint32(40),
 ##  Use pilot blades
-    UsePilotBlade = cms.bool(False),
+    UsePilotBlade = cms.bool(True),
 ##  Use phase1
     UsePhase1 = cms.bool(False),
 ## Empty Regions PSet means complete unpacking

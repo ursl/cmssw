@@ -83,7 +83,19 @@ FrameConversion::FrameConversion( const PixelEndcapName & name, int rocIdInDetUn
   int  colOffset = 0; 
 
   if (name.pannelName()==1) {
-    if (name.plaquetteName()==1) {
+    if (name.moduleType() == PixelModuleName::v2x8) {
+      if (rocIdInDetUnit < 8) {
+	slopeRow = 1;
+	slopeCol = -1;
+	rowOffset = 0;
+	colOffset = (8-rocIdInDetUnit)*LocalPixel::numColsInRoc-1;
+      } else {
+	slopeRow = -1;
+	slopeCol = 1;
+	rowOffset = 2*LocalPixel::numRowsInRoc-1;
+	colOffset = (rocIdInDetUnit-8)*LocalPixel::numColsInRoc;
+      }
+    } else if (name.plaquetteName()==1) {
       slopeRow = 1;
       slopeCol = -1;
       rowOffset = 0;
@@ -119,7 +131,19 @@ FrameConversion::FrameConversion( const PixelEndcapName & name, int rocIdInDetUn
       colOffset = rocIdInDetUnit*LocalPixel::numColsInRoc;
     }
   } else {
-    if (name.plaquetteName()==1) {
+    if (name.moduleType() == PixelModuleName::v2x8) {
+      if (rocIdInDetUnit < 8) {
+	slopeRow = 1;
+	slopeCol = -1;
+	rowOffset = 0;
+	colOffset = (8-rocIdInDetUnit)*LocalPixel::numColsInRoc-1;
+      } else {
+	slopeRow = -1;
+	slopeCol = 1;
+	rowOffset = 2*LocalPixel::numRowsInRoc-1;
+	colOffset = (rocIdInDetUnit-8)*LocalPixel::numColsInRoc;
+      }
+    } else if (name.plaquetteName()==1) {
       if (rocIdInDetUnit <3) {
         slopeRow = 1;
         slopeCol = -1;

@@ -11,7 +11,7 @@ siPixelDigis.ErrorList = cms.vint32(29)
 ## UserErrorList: list of error codes used by Pixel experts for investigation
 siPixelDigis.UserErrorList = cms.vint32(40)
 ##  Use pilot blades
-siPixelDigis.UsePilotBlade = cms.bool(False)
+    UsePilotBlade = cms.bool(True),
 ##  Use phase1
 siPixelDigis.UsePhase1 = cms.bool(False)
 ## Empty Regions PSet means complete unpacking

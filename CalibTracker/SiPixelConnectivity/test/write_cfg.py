@@ -4,11 +4,14 @@ process = cms.Process("MapWriter")
 process.load("CondCore.DBCommon.CondDBCommon_cfi")
 process.CondDBCommon.connect = cms.string("sqlite_file:cabling.db")
 
-process.load("Configuration.StandardSequences.Geometry_cff")
+process.load("Configuration.Geometry.GeometryDB_cff")
 process.load("Geometry.CMSCommonData.cmsExtendedGeometry2015PilotXML_cfi")
-process.trackerGeometry.applyAlignment = cms.bool(False)
+#process.trackerGeometry.applyAlignment = cms.bool(False)
  
-process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
+process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff")
+from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
+process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:run2_mc', '')
+
 
 process.source = cms.Source("EmptyIOVSource",
     timetype = cms.string('runnumber'),
@@ -34,8 +37,7 @@ process.PoolDBOutputService = cms.Service("PoolDBOutputService",
 
 process.load("CalibTracker.SiPixelConnectivity.PixelToLNKAssociateFromAsciiESProducer_cfi")
 
-#ul changes
-process.GlobalTag.globaltag = 'START70_V7A::All'
+
 process.pixelToLNKAssociateFromAscii.fileName = cms.string('pixelToLNK_pilot.ascii')
 
 process.mapwriter = cms.EDAnalyzer("SiPixelFedCablingMapWriter",

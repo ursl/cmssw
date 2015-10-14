@@ -234,12 +234,14 @@ void PixelToLNKAssociateFromAscii::addConnections(
      pos = module.find("TYP:");
      if (pos ==  string::npos) throw cms::Exception("problem with pannel type formatting");
      string strT = module.substr(pos+5,3);
+     string strT4 = module.substr(pos+5,4);
 
      PixelPannelType::PannelType pannelType; 
           if (strT=="P3R") pannelType=PixelPannelType::p3R;
      else if (strT=="P3L") pannelType=PixelPannelType::p3L;
      else if (strT=="P4R") pannelType=PixelPannelType::p4R;
      else if (strT=="P4L") pannelType=PixelPannelType::p4L;
+     else if (strT4=="P2X8") pannelType=PixelPannelType::p2x8;
      else throw cms::Exception("problem with pannel type formatting (unrecoginzed word)");
 
      if ( pannelType==PixelPannelType::p4L) {
@@ -350,6 +352,32 @@ void PixelToLNKAssociateFromAscii::addConnections(
          }
        }
      }
+     else if ( pannelType==PixelPannelType::p2x8) {
+       //       cout <<"----------- p2x8"<<endl;
+       int rocLnkId = 0; 
+       //       Range rocs = Range(0, 15); 
+       //       for (int rocDetId=rocs.min(); rocDetId <= rocs.max(); rocDetId++) {
+       for (int rocDetId=rocDetIds.min(); rocDetId <= rocDetIds.max(); rocDetId++) {
+	 rocLnkId++;
+	 DetectorRocId  detectorRocId;
+	 int plaq(1);
+	 PixelEndcapName * name = new PixelEndcapName(part, disk, blade, pannel, plaq);
+	 detectorRocId.module = name;
+	 detectorRocId.rocDetId = rocDetId;
+	 CablingRocId   cablingRocId;
+	 cablingRocId.fedId = fedId;
+	 cablingRocId.linkId = linkId;
+	 cablingRocId.rocLinkId = rocLnkId;
+	 theConnection.push_back( make_pair(detectorRocId,cablingRocId));
+	 cout << " rocDetId: " << rocDetId 
+	      << " rocLnkId:" << rocLnkId 
+	      << " fedId = " << fedId 
+	      << " linkId = " << linkId
+	      << " name = " << name->name()
+	      << endl;
+       } 
+     } 
+
 
   }
 }

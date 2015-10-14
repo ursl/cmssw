@@ -33,13 +33,19 @@ PixelROC const * SiPixelFrameConverter::toRoc(int link, int roc) const {
                                static_cast<unsigned int>(link),
                                static_cast<unsigned int>(roc)}; 
   const PixelROC * rocp = (theFed) ? theTree->findItemInFed(path, theFed) : theMap->findItem(path);
-  if unlikely(!rocp){
-    stringstream stm;
-    stm << "Map shows no fed="<<theFedId
-        <<", link="<< link
-        <<", roc="<< roc;
-    edm::LogWarning("SiPixelFrameConverter") << stm.str();
-  }
+  
+  if unlikely(!rocp) {
+      stringstream stm;
+      stm << "Map shows no fed="<<theFedId
+	  << ", link="<< link
+	  << ", roc="<< roc;
+      edm::LogWarning("SiPixelFrameConverter") << stm.str();
+    } 
+
+  if (1) std::cout << "Map with fed="<<theFedId
+		   << ", link="<< link
+		   << ", roc="<< roc << std::endl;
+  
   return rocp;
 }
 

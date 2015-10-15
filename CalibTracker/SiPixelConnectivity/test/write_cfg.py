@@ -13,6 +13,7 @@ process.GlobalTag.globaltag = "74X_dataRun2_Prompt_v2"
 # ---------------------- pilotBlade Geometry -------------------
 process.load('Configuration.Geometry.GeometrySimDB_cff')
 process.load('Configuration.Geometry.GeometryRecoDB_cff')
+# -- would like to get this to work ...
 #process.load("Configuration.StandardSequences.Geometry_cff")
 #process.load("Geometry.CMSCommonData.cmsExtendedGeometry2015PilotXML_cfi")
 process.trackerGeometryDB.applyAlignment = cms.bool(False)
